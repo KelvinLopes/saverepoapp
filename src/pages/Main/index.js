@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import api from '../../services/api';
+
 import { AiFillGithub } from 'react-icons/ai';
 
 import { FaPlus, FaSpinner } from 'react-icons/fa';
@@ -33,8 +35,11 @@ componentDidMount() {
 
 //Salva os dados no localStorage
 componentDidUpdate(_, prevState) {
+
+  const { repositories } = this.state;
+
   if(prevState.repositories !== repositories) {
-    localStorage.setItem('repositories', JSON.stringify(respositóries));
+    localStorage.setItem('repositories', JSON.stringify(repositories));
   }
 }
 
@@ -86,6 +91,9 @@ handleSubmit = async e => {
 };
 
   render () {
+
+    const { newRepo, repositories, loading, checkError, sendErrorMensagem } = this.state;
+
     return (
       <Container>
       <h1>
