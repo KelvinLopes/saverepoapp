@@ -67,7 +67,7 @@ handleSubmit = async e => {
       name: response.data.full_name,
     };
 
-    this.state({
+    this.setState({
       respositories: [...respositories, data],
       newRepo: '',
       sendErrorMensagem: '',
@@ -76,10 +76,10 @@ handleSubmit = async e => {
   } catch(error) {
     let textMessange = '';
     if(error !== 'Repositório duplicado')
-      textMessange = 'Repositíro inexistente';
+      textMessange = 'Repositóro inexistente';
       else textMessange = error;
 
-      this.state({
+      this.setState({
         checkError: false,
         newRepo: '',
         sendErrorMensagem: textMessange,
@@ -87,7 +87,6 @@ handleSubmit = async e => {
   } finally {
     this.setState({loading: false, checkError: false});
   }
-
 };
 
   render () {
@@ -96,27 +95,46 @@ handleSubmit = async e => {
 
     return (
       <Container>
-      <h1>
-        <AiFillGithub />
-          Minha lista de repositórios do Github
-      </h1>
-      <Error><h1></h1></Error>
-      <Form >
-        <input
-         type="text"
-          placeholder="Para adicionar a lista, digite um repositório"
-          />
-          <SubmitButton>
-            <FaPlus color="#fff" size={14} />
-          </SubmitButton>
-      </Form>
-      <List>
-        <Link>
-          Detalhes
-        </Link>
-      </List>
-      </Container>
-    );
+        <h1>
+          <AiFillGithub />
+            Minha lista de repositórios do Github
+        </h1>
+      {( checkError ? (<> </>) :
 
+          <Error>
+            <h1>
+              {sendErrorMensagem}
+            </h1>
+          </Error>)}
+
+      <Form onSubmit={this.handleSubmit}>
+       <input
+          type="text"
+            placeholder="Para adicionar a lista, digite um repositório"
+            value={newRepo}
+            onChange={this.handleInputChange}
+          />
+        <SubmitButton loading={loading ? 1 : 0}>
+
+            {
+              loading ? (<FaSpinner color="fff" size={14}/>) :
+                        (<FaPlus color="#fff" size={14} />)
+            }
+        </SubmitButton>
+      </Form>
+
+      <List>
+        {repositories.map(repository => (
+        <li key={repository.name}>
+          <span>{repository.name}</span>
+            <Link to ={`/repository/${encodeURIComponent(repository.name)}`}>
+              Detalhes
+            </Link>
+        </li>
+        ))}
+      </List>
+
+    </Container>
+    );
   }
 }
