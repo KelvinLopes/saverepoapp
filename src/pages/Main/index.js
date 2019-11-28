@@ -53,12 +53,12 @@ handleSubmit = async e => {
   this.setState({ loading: true });
 
   try {
-    const { newRepo, respositories } = this.state;
+    const { newRepo, repositories } = this.state;
 
-    const alreadyRepo = respositories.find(repo => repo.name === newRepo);
+    const alreadyRepo = repositories.find(repo => repo.name === newRepo);
 
     if(alreadyRepo) {
-      throw new Error('Repositório duplicado');
+      throw ('Repositório duplicado');
     }
 
     const response = await api.get(`/repos/${newRepo}`);
@@ -68,7 +68,7 @@ handleSubmit = async e => {
     };
 
     this.setState({
-      respositories: [...respositories, data],
+      repositories: [...repositories, data],
       newRepo: '',
       sendErrorMensagem: '',
       checkError: true,
@@ -99,7 +99,7 @@ handleSubmit = async e => {
           <AiFillGithub />
             Minha lista de repositórios do Github
         </h1>
-      {( checkError ? (<> </>) :
+      { checkError ? (<> </>) : (
 
           <Error>
             <h1>

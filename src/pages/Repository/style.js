@@ -30,7 +30,7 @@ export const Owner = styled.header`
     }
 
   &:active {
-    color: #009abe;
+    color: #ff00ff;
   }
 
   }
@@ -51,7 +51,8 @@ export const Owner = styled.header`
 
   h1 {
     margin-top: 5px;
-    font-weight: 300;
+    font-weight: 400;
+    color: #248eff;
   }
 `
 ;
@@ -102,7 +103,7 @@ export const IssueList = styled.ul`
           }
 
         &:active {
-          color: #009abe;
+          color: #ff00ff;
         }
 
       }

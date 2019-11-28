@@ -11,10 +11,10 @@ export const Form = styled.form`
   input {
     flex: 1 0 auto;
     border: 1.5px solid #248eff;
-    border-radius: 14px 4px 0 14px;
+    border-radius: 14px 14px 14px 14px;
     font-size: 16px;
     outline: none;
-    padding: 5px;
+    padding: 4px;
     font-family: 'Roboto Condensed', sans-serif;
     font-style: italic;
     color: #7159c1;
@@ -58,15 +58,17 @@ export const SubmitButton = styled.button.attrs(props => ({
   justify-content: center;
   outline: none;
   border: 0;
-  margin-left: -20px;
-  width: 42px;
+  margin-left: -40px;
+  width: 44px;
   height: 42px;
   border-radius: 50%;
   background: #248eff;
+  z-index: 2;
 
   &[disabled] {
     cursor: not-allowed;
-    opacity: 0.6;
+    /*opacity: 0.6;*/
+    background: #6db4ff;
   }
 
   ${ props =>
@@ -75,8 +77,7 @@ export const SubmitButton = styled.button.attrs(props => ({
         svg {
           animation: ${rotate} 2s linear infinite;
         }
-      `
-  }
+   `}
 `
 ;
 
@@ -114,7 +115,7 @@ li {
     }
 
   &:active {
-    color: #009abe;
+    color: #ff00ff;
   }
 
   }
