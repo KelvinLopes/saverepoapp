@@ -35,6 +35,7 @@ module.exports = {
     'eslint-disable-next-line': 'off',
     'react/pefer-stateless-function': 'off',
     'react/state-in-constructor': 'off',
-    'react/static-property-placement': 'off'
+    'react/static-property-placement': 'off',
+    'no-throw-literal' : 'off'
   },
 };

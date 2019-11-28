@@ -117,8 +117,12 @@ handleSubmit = async e => {
         <SubmitButton loading={loading ? 1 : 0}>
 
             {
-              loading ? (<FaSpinner color="fff" size={14}/>) :
-                        (<FaPlus color="#fff" size={14} />)
+              loading ? (
+                <FaSpinner color="fff" size={14}/>
+              ) :
+              (
+                <FaPlus color="#fff" size={14} />
+              )
             }
         </SubmitButton>
       </Form>

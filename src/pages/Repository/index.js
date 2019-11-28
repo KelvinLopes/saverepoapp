@@ -38,7 +38,7 @@ export default class Repository extends Component {
       api.get(`/repos/${repoName}/issues`, {
         params: {
           state: 'open',
-          per_pages: 5,
+          per_page: 5,
         },
       }),
     ]);

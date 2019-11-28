@@ -1,6 +1,5 @@
 import styled, { keyframes, css} from 'styled-components';
 
-
 export const Form = styled.form`
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&display=swap');
@@ -40,11 +39,11 @@ export const Form = styled.form`
 const rotate = keyframes`
 
       from {
-        trasnform: rotate(0deg);
+        transform: rotate(0deg);
       }
 
       to {
-        trasnform: rotate(360deg);
+        transform: rotate(360deg);
       }
     `
     ;
@@ -91,11 +90,12 @@ margin: 30px;
 li {
   display: flex;
   flex-direction: row;
-  align-items: space-between;
-  justify-content: center;
-  padding: 0 15px;
-
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
   font-family: 'Roboto Condensed', sans-serif;
+  color: #009aaa;
+  font-weight: 700;
 
   & + li {
     border-top: 1px solid #eeee;
