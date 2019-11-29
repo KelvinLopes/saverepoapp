@@ -126,9 +126,25 @@ li {
 
 export const ShowList = styled.button`
 
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+
+
+  background: none;
+  outline: none;
+  border: none;
+
+  margin: 12px auto;
+
+  &:hover {
+    color: #009aaa;
+    }
+
+  &:active {
+    color: #ff00ff;
+  }
+
 
 `
 ;
@@ -139,7 +155,43 @@ export const HiddenList = styled.button`
   align-items: center;
   justify-content: center;
 
+  background: none;
+  outline: none;
+  border: none;
 
+  margin: 12px auto;
+
+  &:hover {
+    color: #009aaa;
+    }
+
+  &:active {
+    color: #ff00ff;
+  }
+
+`
+;
+
+export const Footer =styled.footer`
+  margin: 0 auto;
+  text-align: center;
+
+  .github-footer {
+    margin: 0 auto;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h6 {
+    margin: 0 auto;
+    text-align: center;
+    color: #009aaa;
+    font-size: 14px;
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+  }
 `
 ;
 

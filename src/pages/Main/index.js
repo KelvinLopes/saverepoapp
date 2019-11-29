@@ -12,7 +12,7 @@ import Container from '../../components/container';
 
 import Error from '../../components/error';
 
-import { Form, SubmitButton, List, ShowList, HiddenList } from './style';
+import { Form, SubmitButton, List, ShowList, HiddenList, Footer } from './style';
 
 export default class Main extends Component {
 
@@ -52,8 +52,10 @@ handleSubmit = async e => {
 
   this.setState({ loading: true });
 
+
   try {
     const { newRepo, repositories } = this.state;
+
 
     const alreadyRepo = repositories.find(repo => repo.name === newRepo);
 
@@ -109,8 +111,10 @@ handleHidenList() {
   const getList = document.querySelector('.list-repo');
   const hidden  = document.querySelector('.hidden-list');
   const show  = document.querySelector('.show-list');
+  const footerLogo = document.querySelector('.github-footer');
 
   getList.style.display = 'none';
+  footerLogo.style.display = 'flex';
   hidden.style.display = 'none';
   show.style.display = 'block';
 }
@@ -119,10 +123,13 @@ handleShowList() {
   const getList = document.querySelector('.list-repo');
   const hidden  = document.querySelector('.hidden-list');
   const show  = document.querySelector('.show-list');
+  const footerLogo = document.querySelector('.github-footer');
 
   getList.style.display = 'block';
+  footerLogo.style.display = 'none';
   hidden.style.display = 'block';
   show.style.display = 'none';
+
 }
 
   render () {
@@ -160,11 +167,20 @@ handleShowList() {
                 <FaPlus color="#fff" size={14} />
               )
             }
+
         </SubmitButton>
       </Form>
-        <HiddenList className="hidden-list"><FaArrowDown  onClick={ () => this.handleHidenList()} /></HiddenList>
-        <ShowList className="show-list" display="none"><FaArrowUp onClick={ () => this.handleShowList()} /></ShowList>
+        <HiddenList className="hidden-list" title="Ocultar">
+          <FaArrowDown size={18}
+          onClick={
+            () => this.handleHidenList()
+            } />
 
+          </HiddenList>
+        <ShowList className="show-list" title="Exibir">
+          <FaArrowUp size={18}
+          onClick={ () => this.handleShowList()
+          } /></ShowList>
 
       <List className="list-repo">
         {repositories.map(repository => (
@@ -191,6 +207,13 @@ handleShowList() {
         </li>
         ))}
       </List>
+
+    <Footer>
+      <div className="github-footer">
+      <AiFillGithub  size={38} color="#586969"/>
+      <h6>Minha lista</h6>
+      </div>
+    </Footer>
 
     </Container>
     );
