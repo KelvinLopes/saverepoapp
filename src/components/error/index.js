@@ -7,7 +7,7 @@ const Error = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 350px;
+  max-width: 640px;
 
   h1{
     font-size: 18px;
@@ -20,6 +20,7 @@ const Error = styled.span`
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
 
 `

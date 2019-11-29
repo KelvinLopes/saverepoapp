@@ -1,4 +1,16 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const rotate = keyframes`
+
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    `
+    ;
 
 export const Loading = styled.div`
   color: #fff;
@@ -8,6 +20,18 @@ export const Loading = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  h1{
+    margin-left: 5px;
+    font-size: 10px;
+    margin-top: 3px;
+  }
+
+  svg {
+    width: 48px;
+    height: 48px;
+    animation: ${rotate} 15s linear infinite;
+  }
 `
 ;
 

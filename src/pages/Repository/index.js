@@ -10,6 +10,8 @@ import Container from '../../components/container';
 
 import { Loading, Owner, IssueList } from './style';
 
+import { AiFillGithub } from 'react-icons/ai';
+
 
 export default class Repository extends Component {
 
@@ -54,7 +56,10 @@ export default class Repository extends Component {
     const { repository, issues, loading } = this.state;
 
     if(loading) {
-      return <Loading>Carregando</Loading>;
+      return <Loading>
+        <AiFillGithub />
+              <h1>Carregando</h1>
+       </Loading>;
     }
 
     return(

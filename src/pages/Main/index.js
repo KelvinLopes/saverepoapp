@@ -6,13 +6,13 @@ import api from '../../services/api';
 
 import { AiFillGithub } from 'react-icons/ai';
 
-import { FaPlus, FaSpinner } from 'react-icons/fa';
+import { FaPlus, FaSpinner, FaRegTrashAlt, FaArrowDown, FaArrowUp } from 'react-icons/fa';
 
 import Container from '../../components/container';
 
 import Error from '../../components/error';
 
-import { Form, SubmitButton, List} from './style';
+import { Form, SubmitButton, List, ShowList, HiddenList } from './style';
 
 export default class Main extends Component {
 
@@ -58,7 +58,7 @@ handleSubmit = async e => {
     const alreadyRepo = repositories.find(repo => repo.name === newRepo);
 
     if(alreadyRepo) {
-      throw ('Repositório duplicado');
+      throw ('Ei... você já salvou esse! Não se preocupe não terá um duplicado.');
     }
 
     const response = await api.get(`/repos/${newRepo}`);
@@ -74,9 +74,10 @@ handleSubmit = async e => {
       checkError: true,
     });
   } catch(error) {
+    this.alternativeInputColorRed();
     let textMessange = '';
-    if(error !== 'Repositório duplicado')
-      textMessange = 'Repositóro inexistente';
+    if(error !== 'Ei... você já salvou esse! Não se preocupe não terá um duplicado.')
+        textMessange = 'Repositóro não existe na base Github';
       else textMessange = error;
 
       this.setState({
@@ -88,6 +89,41 @@ handleSubmit = async e => {
     this.setState({loading: false, checkError: false});
   }
 };
+
+
+alternativeInputColorRed(){
+  const colorBorderInput = document.querySelector('input');
+
+  colorBorderInput.style.borderColor = 'rgba(250,25,0,0.7)';
+
+  setTimeout( () => {
+    colorBorderInput.style.borderColor = '#248eff';
+  }, 2000);
+}
+
+handleDeleteRepo = (repositories) => {
+  this.setState({ repositories: this.state.repositories.filter( repo => repo !== repositories) })
+}
+
+handleHidenList() {
+  const getList = document.querySelector('.list-repo');
+  const hidden  = document.querySelector('.hidden-list');
+  const show  = document.querySelector('.show-list');
+
+  getList.style.display = 'none';
+  hidden.style.display = 'none';
+  show.style.display = 'block';
+}
+
+handleShowList() {
+  const getList = document.querySelector('.list-repo');
+  const hidden  = document.querySelector('.hidden-list');
+  const show  = document.querySelector('.show-list');
+
+  getList.style.display = 'block';
+  hidden.style.display = 'block';
+  show.style.display = 'none';
+}
 
   render () {
 
@@ -126,14 +162,32 @@ handleSubmit = async e => {
             }
         </SubmitButton>
       </Form>
+        <HiddenList className="hidden-list"><FaArrowDown  onClick={ () => this.handleHidenList()} /></HiddenList>
+        <ShowList className="show-list" display="none"><FaArrowUp onClick={ () => this.handleShowList()} /></ShowList>
 
-      <List>
+
+      <List className="list-repo">
         {repositories.map(repository => (
         <li key={repository.name}>
           <span>{repository.name}</span>
+          <div>
+          <span>
+            <span>
             <Link to ={`/repository/${encodeURIComponent(repository.name)}`}>
               Detalhes
             </Link>
+            </span>
+            <span>
+            <FaRegTrashAlt className="trash" title="Remover"
+              cursor="pointer"
+              onClick={()=>
+              this.handleDeleteRepo(repository)
+           }>
+          </FaRegTrashAlt>
+          </span>
+          </span>
+          </div>
+
         </li>
         ))}
       </List>

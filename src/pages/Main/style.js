@@ -67,7 +67,6 @@ export const SubmitButton = styled.button.attrs(props => ({
 
   &[disabled] {
     cursor: not-allowed;
-    /*opacity: 0.6;*/
     background: #6db4ff;
   }
 
@@ -105,6 +104,8 @@ li {
   a {
     color: #248eff;
     text-decoration: none;
+    margin-left: 5px;
+    animation: ${rotate} 2s linear infinite;
 
   &:visited {
     color: #248eff;
@@ -122,4 +123,31 @@ li {
 }
 `
 ;
+
+export const ShowList = styled.button`
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+`
+;
+
+export const HiddenList = styled.button`
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+`
+;
+
+export const Delete = styled.button`
+  list-style: none;
+  margin: 30px;
+  border: none;
+  background: none;
+  color: #7159c1;
+`;
 
