@@ -10,7 +10,7 @@ export const Form = styled.form`
 
   input {
     flex: 1 0 auto;
-    border: 1.5px solid #248eff;
+    border: 1.5px solid #009aaa;
     border-radius: 14px 14px 14px 14px;
     font-size: 16px;
     outline: none;
@@ -134,11 +134,12 @@ export const ShowList = styled.button`
   background: none;
   outline: none;
   border: none;
+  color: #009aaa;
 
   margin: 12px auto;
 
   &:hover {
-    color: #009aaa;
+    color: #248eff;
     }
 
   &:active {
@@ -158,11 +159,12 @@ export const HiddenList = styled.button`
   background: none;
   outline: none;
   border: none;
+  color: #009aaa;
 
   margin: 12px auto;
 
   &:hover {
-    color: #009aaa;
+    color: #248eff;
     }
 
   &:active {
@@ -177,12 +179,12 @@ export const Footer =styled.footer`
   text-align: center;
 
   .github-footer {
-    margin: 0 auto;
 
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative !important;
   }
 
   h6 {

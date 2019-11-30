@@ -13,7 +13,7 @@ const Error = styled.span`
     font-size: 18px;
     font-weight: 700;
     font-family: 'Roboto Condensed', sans-serif;
-    color: rgba(250,25,0,0.7);
+    color: rgba(250,25,0,0.6);
     text-align: center;
     vertical-align: middle;
 

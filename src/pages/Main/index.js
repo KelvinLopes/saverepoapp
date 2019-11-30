@@ -88,7 +88,7 @@ handleSubmit = async e => {
         sendErrorMensagem: textMessange,
       });
   } finally {
-    this.setState({loading: false, checkError: false});
+    this.setState({loading: false, checkError: false });
   }
 };
 
@@ -99,7 +99,7 @@ alternativeInputColorRed(){
   colorBorderInput.style.borderColor = 'rgba(250,25,0,0.7)';
 
   setTimeout( () => {
-    colorBorderInput.style.borderColor = '#248eff';
+    colorBorderInput.style.borderColor = '#009aaa';
   }, 2000);
 }
 
@@ -140,7 +140,7 @@ handleShowList() {
       <Container>
         <h1>
           <AiFillGithub />
-            Minha lista de repositórios do Github
+            saveRepo
         </h1>
       { checkError ? (<> </>) : (
 
@@ -170,40 +170,41 @@ handleShowList() {
 
         </SubmitButton>
       </Form>
-        <HiddenList className="hidden-list" title="Ocultar">
-          <FaArrowDown size={18}
-          onClick={
-            () => this.handleHidenList()
-            } />
 
-          </HiddenList>
+        <HiddenList className="hidden-list" title="Ocultar">
+            <FaArrowDown size={18}
+            onClick={
+              () => this.handleHidenList()
+              } />
+        </HiddenList>
+
         <ShowList className="show-list" title="Exibir">
-          <FaArrowUp size={18}
-          onClick={ () => this.handleShowList()
-          } /></ShowList>
+            <FaArrowUp size={18}
+            onClick={ () => this.handleShowList()
+            } />
+        </ShowList>
 
       <List className="list-repo">
         {repositories.map(repository => (
         <li key={repository.name}>
           <span>{repository.name}</span>
-          <div>
-          <span>
-            <span>
-            <Link to ={`/repository/${encodeURIComponent(repository.name)}`}>
-              Detalhes
-            </Link>
+            <div>
+              <span>
+                  <span>
+                  <Link to ={`/repository/${encodeURIComponent(repository.name)}`}>
+                    Detalhes
+                  </Link>
+                  </span>
+                  <span>
+                  <FaRegTrashAlt className="trash" title="Remover"
+                    cursor="pointer"
+                    onClick={()=>
+                    this.handleDeleteRepo(repository)
+                }>
+                </FaRegTrashAlt>
+              </span>
             </span>
-            <span>
-            <FaRegTrashAlt className="trash" title="Remover"
-              cursor="pointer"
-              onClick={()=>
-              this.handleDeleteRepo(repository)
-           }>
-          </FaRegTrashAlt>
-          </span>
-          </span>
-          </div>
-
+            </div>
         </li>
         ))}
       </List>

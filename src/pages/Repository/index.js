@@ -8,9 +8,12 @@ import Proptypes from 'prop-types';
 
 import Container from '../../components/container';
 
-import { Loading, Owner, IssueList } from './style';
+import { Loading, Owner, IssueList, IssueFilter, PageActions } from './style';
 
 import { AiFillGithub } from 'react-icons/ai';
+
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+
 
 
 export default class Repository extends Component {
@@ -27,11 +30,19 @@ export default class Repository extends Component {
     repositories: {},
     issues: [],
     loading: true,
+    filtering: [
+      {state: 'all', label: 'Todas', active: true},
+      {state: 'open', label: 'Abertas', active: false},
+      {state: 'closed', label: 'Fechadas', active: false},
+    ],
+    filterIndex: 0,
+    page: 1,
   }
 
   async componentDidMount() {
 
     const { match } = this.props;
+    const { filtering } = this.state;
 
     const repoName = decodeURIComponent(match.params.repository);
 
@@ -39,7 +50,7 @@ export default class Repository extends Component {
       api.get(`/repos/${repoName}`),
       api.get(`/repos/${repoName}/issues`, {
         params: {
-          state: 'open',
+          state: filtering.find(situation => situation.active).state,
           per_page: 5,
         },
       }),
@@ -52,8 +63,38 @@ export default class Repository extends Component {
     });
   }
 
+  loadIssues = async () => {
+    const { match } = this.props;
+    const { filtering, filterIndex, page } = this.state;
+
+    const repoName = decodeURIComponent(match.params.repository);
+
+    const response = await api.get(`/repos/${repoName}/issues`, {
+      params: {
+        state: filtering[filterIndex].state,
+        per_page: 5,
+        page,
+      },
+    });
+
+    this.setState({ issues: response.data });
+  };
+
+  handleFilterClick = async filterIndex => {
+    await this.setState({ filterIndex });
+    this.loadIssues();
+  };
+
+  handlePage = async action => {
+    const { page } = this.state;
+    await this.setState({
+      page: action === 'back' ? page -1 : page +1,
+    });
+    this.loadIssues();
+  }
+
   render() {
-    const { repository, issues, loading } = this.state;
+    const { repository, issues, loading, filtering, filterIndex, page } = this.state;
 
     if(loading) {
       return <Loading>
@@ -72,6 +113,18 @@ export default class Repository extends Component {
         </Owner>
 
         <IssueList>
+          <IssueFilter active={filterIndex}>
+              {filtering.map((filtering, filterIndex) =>
+                <button
+                  type="button"
+                  key={filtering.label}
+                  onClick={() => this.handleFilterClick(filterIndex)}
+                >
+                  {filtering.label}
+                </button>
+              )}
+          </IssueFilter>
+
           {
             issues.map(issue => (
               <li key={String(issue.id)}>
@@ -88,6 +141,25 @@ export default class Repository extends Component {
               </li>
             ))}
         </IssueList>
+        <PageActions>
+          <button
+              type="button"
+              disabled={ page < 2  }
+              onClick={() => this.handlePage('back')}
+              >
+                <FaArrowLeft />
+
+            </button>
+              <span className="span-page">Página {page}</span>
+
+              <button type="button"
+              disabled={ issues.length <= 1  }
+              onClick={() => this.handlePage('next')}>
+
+                 <FaArrowRight />
+
+              </button>
+        </PageActions>
       </Container>
     );
   }
