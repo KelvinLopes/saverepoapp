@@ -21,7 +21,7 @@ Salve links de repositíros do Github, veja a descrição deles, navegue pelas i
 
 ## Armazenamento
 
-No mommento é feito no local storage
+No momento é feito no local storage
 
 
 
