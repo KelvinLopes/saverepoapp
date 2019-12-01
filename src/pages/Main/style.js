@@ -17,17 +17,18 @@ export const Form = styled.form`
     padding: 4px;
     font-family: 'Roboto Condensed', sans-serif;
     font-style: italic;
-    color: #7159c1;
+    color: #fff;
+    background: #2a2a2a;
 
     &::placeholder{
-      color: #00006f;
+      color: #248eff;
       font-weight: lighter;
     }
 
     @media screen and (max-width:500px){
 
       &::placeholder{
-      color: #00006f;
+      color: #248eff;
       font-weight: lighter;
       font-size: 0.8rem;
     }
@@ -105,6 +106,7 @@ li {
     color: #248eff;
     text-decoration: none;
     margin-left: 5px;
+    padding-right: 5px;
     animation: ${rotate} 2s linear infinite;
 
   &:visited {

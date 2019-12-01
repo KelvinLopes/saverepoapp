@@ -147,7 +147,7 @@ export default class Repository extends Component {
               disabled={ page < 2  }
               onClick={() => this.handlePage('back')}
               >
-                <FaArrowLeft />
+                <FaArrowLeft color="#fff"/>
 
             </button>
               <span className="span-page">Página {page}</span>
@@ -156,7 +156,7 @@ export default class Repository extends Component {
               disabled={ issues.length <= 1  }
               onClick={() => this.handlePage('next')}>
 
-                 <FaArrowRight />
+                 <FaArrowRight color="#fff"/>
 
               </button>
         </PageActions>

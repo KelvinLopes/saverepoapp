@@ -6,13 +6,19 @@ import api from '../../services/api';
 
 import { AiFillGithub } from 'react-icons/ai';
 
-import { FaPlus, FaSpinner, FaRegTrashAlt, FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { FaPlus, FaSpinner, FaRegTrashAlt, FaArrowDown, FaArrowUp, FaInfo } from 'react-icons/fa';
 
 import Container from '../../components/container';
 
 import Error from '../../components/error';
 
+import Info from '../../components/info';
+
+import Norepo from '../../components/norepos';
+
 import { Form, SubmitButton, List, ShowList, HiddenList, Footer } from './style';
+
+import noRepoImg from '../../assents/norepo.svg';
 
 export default class Main extends Component {
 
@@ -31,6 +37,14 @@ componentDidMount() {
   if(repositories) {
     this.setState({ repositories: JSON.parse(repositories) });
   }
+
+}
+
+//Otimiza o carregamento do app antes de seus componentes serem desmontados
+componentWillUnmount() {
+  document.removeEventListener('click', this.handleSubmit);
+  document.removeEventListener('click', this.handleHidenList);
+  document.removeEventListener('click', this.handleShowList);
 }
 
 //Salva os dados no localStorage
@@ -77,6 +91,7 @@ handleSubmit = async e => {
     });
   } catch(error) {
     this.alternativeInputColorRed();
+    this.timeError();
     let textMessange = '';
     if(error !== 'Ei... você já salvou esse! Não se preocupe não terá um duplicado.')
         textMessange = 'Repositóro não existe na base Github';
@@ -92,6 +107,11 @@ handleSubmit = async e => {
   }
 };
 
+timeError(){
+  setTimeout(() => {
+    this.setState({sendErrorMensagem : ''});
+  },5000);
+}
 
 alternativeInputColorRed(){
   const colorBorderInput = document.querySelector('input');
@@ -113,10 +133,12 @@ handleHidenList() {
   const show  = document.querySelector('.show-list');
   const footerLogo = document.querySelector('.github-footer');
 
+
   getList.style.display = 'none';
   footerLogo.style.display = 'flex';
   hidden.style.display = 'none';
   show.style.display = 'block';
+
 }
 
 handleShowList() {
@@ -129,7 +151,6 @@ handleShowList() {
   footerLogo.style.display = 'none';
   hidden.style.display = 'block';
   show.style.display = 'none';
-
 }
 
   render () {
@@ -141,7 +162,11 @@ handleShowList() {
         <h1>
           <AiFillGithub />
             saveRepo
+            <Link  to ={`/info/${decodeURIComponent(Info) } `} >
+                   <FaInfo className="link-info" title="info" size={14}/>
+             </Link>
         </h1>
+
       { checkError ? (<> </>) : (
 
           <Error>
@@ -171,18 +196,23 @@ handleShowList() {
         </SubmitButton>
       </Form>
 
+      { repositories.length ? (<>
         <HiddenList className="hidden-list" title="Ocultar">
-            <FaArrowDown size={18}
+            <FaArrowDown  size={18}
             onClick={
               () => this.handleHidenList()
               } />
         </HiddenList>
 
         <ShowList className="show-list" title="Exibir">
-            <FaArrowUp size={18}
+            <FaArrowUp  size={18}
             onClick={ () => this.handleShowList()
             } />
         </ShowList>
+        </> ): (<Norepo>
+               <img src={noRepoImg} alt="Img no repo" />
+              </Norepo>)}
+
 
       <List className="list-repo">
         {repositories.map(repository => (
@@ -208,6 +238,7 @@ handleShowList() {
         </li>
         ))}
       </List>
+
 
     <Footer>
       <div className="github-footer">

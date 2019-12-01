@@ -193,7 +193,7 @@ export const PageActions = styled.div`
     outline: 0;
     border: 0;
     padding: 8px;
-    background: #2f7272;
+    background: #134a17;
 
     &:disabled {
       opacity: 0.35;

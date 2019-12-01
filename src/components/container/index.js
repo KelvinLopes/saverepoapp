@@ -26,15 +26,44 @@ const Container = styled.div`
       width: 6rem;
       height: 6rem;
     }
+
+    a svg {
+    margin: 0 auto 0 280px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: 25px;
+    height: 25px;
+
+  }
   }
 
-  @media screen and (max-width:500px) {
+
+  @media screen and (max-width:300px), screen and (max-width: 411px),
+   screen and (max-width: 414px) {
 
     h1 {
       font-size: 1.4em;
+
+      a svg {
+        margin: 0 auto 0 77px;
+      }
     }
 
   }
+
+
+  @media screen and (min-width:800px), screen and (min-width: 1000px) {
+
+      h1 {
+        font-size: 1.4em;
+
+        a svg {
+          margin: 0 auto 0 300px;
+        }
+}
+
+}
 `
 ;
 
